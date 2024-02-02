@@ -19,6 +19,7 @@ let ticketShown = false;
 let isCloseVideoPlaying = false;
 
 let mytTimer;
+let timerStarted = false;
 
 const divNero = document.querySelector(".div-nero");
 //video-----------------------------------------------------------------------
@@ -125,15 +126,15 @@ function setup() {
 
 function draw() {
   // background(220);
-  console.log(soundLabel);
-  //console.log(videoLabel);
+  //console.log(soundLabel);
+  console.log(videoLabel);
 
   // fill(255);
   // textSize(32);
   // textAlign(CENTER, CENTER);
   // text(soundLabel, width / 2, height / 2);
 
-  console.log(stato);
+  //console.log(stato);
 
   if (stato == "closed") {
     checkBusso();
@@ -214,12 +215,16 @@ function checkBusso() {
 }
 
 function checkTicket() {
-  mytTimer = setTimeout(() => {
-    if (!ticketShown) {
-      stato = "tooLate";
-      clearTimeout(mytTimer);
-    }
-  }, tooLateTimer);
+  if (!timerStarted) {
+    timerStarted = true;
+    mytTimer = setTimeout(() => {
+      if (!ticketShown) {
+        stato = "tooLate";
+        clearTimeout(mytTimer);
+      }
+    }, tooLateTimer);
+  }
+
   if (videoLabel == "Biglietto") {
     ticketShown = true;
     console.log("dovrei controllare il ticket");
@@ -306,6 +311,7 @@ function tooLate() {
 }
 
 function expInit() {
+  timerStarted = false;
   ticketShown = false;
   stato = "closed";
 
