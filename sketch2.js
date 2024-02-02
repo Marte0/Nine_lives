@@ -1,12 +1,12 @@
 //teachable mchine busso-----------------------------------------------------
 let soundClassifier;
 let soundLabel = "listening...";
-let soundModel = "https://teachablemachine.withgoogle.com/models/lNW16UxdQ/";
+let soundModel = "https://teachablemachine.withgoogle.com/models/CQEan2kQ3/";
 
 //teachable machine video----------------------------------------------------
 
 let videoClassifier;
-let imageModelURL = "https://teachablemachine.withgoogle.com/models/3S5InRWZg/";
+let imageModelURL = "https://teachablemachine.withgoogle.com/models/rjYsncDqH/";
 let video;
 let flippedVideo;
 let videoLabel = "";
@@ -14,8 +14,13 @@ let videoLabel = "";
 // variabili mie--------------------------------------------------------------
 let stato = "none";
 let z = 10;
-const tooLateTimer = 20000;
+const tooLateTimer = 15000;
 let ticketShown = false;
+let isCloseVideoPlaying = false;
+
+let mytTimer;
+
+const divNero = document.querySelector(".div-nero");
 //video-----------------------------------------------------------------------
 const knockVideo = document.querySelector(".knockVideo");
 knockVideo.style.opacity = 0;
@@ -30,7 +35,13 @@ close1Video.addEventListener(
   () => {
     close1Video.pause();
     console.log("finitovideochiuse");
+    isCloseVideoPlaying = false;
+
+    //close1Video.style.opacity = 0;
+    //close1Video.muted = true;
+    //divNero.style.zIndex = 99999;
   },
+
   false
 );
 
@@ -39,6 +50,9 @@ riddleVideo.style.opacity = 0;
 
 const winVideo = document.querySelector(".winVideo");
 winVideo.style.opacity = 0;
+
+const loseVideo = document.querySelector(".loseVideo");
+loseVideo.style.opacity = 0;
 
 const idleVideo = document.querySelector(".idleVideo");
 idleVideo.style.opacity = 0;
@@ -80,6 +94,9 @@ startButton.onclick = function () {
 
   idleVideo.play();
   idleVideo.pause();
+
+  loseVideo.play();
+  loseVideo.pause();
 };
 
 function preload() {
@@ -92,6 +109,7 @@ function preload() {
   riddleVideo.pause();
   winVideo.pause();
   idleVideo.pause();
+  loseVideo.pause();
 }
 function setup() {
   soundClassifier.classify(gotAudioResult);
@@ -107,13 +125,15 @@ function setup() {
 
 function draw() {
   // background(220);
-  console.log(soundLabel);
+  //console.log(soundLabel);
   //console.log(videoLabel);
 
   // fill(255);
   // textSize(32);
   // textAlign(CENTER, CENTER);
   // text(soundLabel, width / 2, height / 2);
+
+  console.log(stato);
 
   if (stato == "closed") {
     checkBusso();
@@ -137,6 +157,10 @@ function draw() {
 
   if (stato == "win") {
     win();
+  }
+
+  if (stato == "lose") {
+    lose();
   }
 }
 
@@ -190,7 +214,7 @@ function checkBusso() {
 }
 
 function checkTicket() {
-  setTimeout(() => {
+  mytTimer = setTimeout(() => {
     if (!ticketShown) {
       stato = "tooLate";
     }
@@ -249,12 +273,27 @@ function win() {
   }, 5000);
 }
 
+function lose() {
+  loseVideo.style.opacity = 1;
+  loseVideo.style.zIndex = z++;
+  loseVideo.currentFrame = 0;
+  loseVideo.play();
+  stato = "animating";
+  setTimeout(() => {
+    expInit();
+  }, 5000);
+}
+
 function tooLate() {
-  console.log(stato);
+  clearTimeout(mytTimer);
+  // console.log(stato);
+  close1Video.muted = false;
   close1Video.style.opacity = 1;
   close1Video.style.zIndex = z++;
   close1Video.currentFrame = 0;
-  if (stato != "animating") {
+
+  if (stato != "animating" && isCloseVideoPlaying === false) {
+    isCloseVideoPlaying = true;
     close1Video.play();
   }
   stato = "animating";
@@ -268,4 +307,20 @@ function tooLate() {
 function expInit() {
   ticketShown = false;
   stato = "closed";
+
+  knockVideo.currentFrame = 1;
+  openVideo.currentFrame = 1;
+  close1Video.currentFrame = 1;
+  riddleVideo.currentFrame = 1;
+  loseVideo.currentFrame = 1;
+  winVideo.currentFrame = 1;
+  idleVideo.currentFrame = 1;
+
+  knockVideo.style.opacity = 0;
+  openVideo.style.opacity = 0;
+  close1Video.style.opacity = 0;
+  riddleVideo.style.opacity = 0;
+  winVideo.style.opacity = 0;
+  loseVideo.style.opacity = 0;
+  idleVideo.style.opacity = 0;
 }

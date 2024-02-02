@@ -13,7 +13,8 @@ canvas {
 .close1Video,
 .riddleVideo,
 .winVideo,
-.idleVideo {
+.idleVideo,
+.loseVideo {
   position: fixed;
   top: 0;
   left: 0;
@@ -24,4 +25,13 @@ canvas {
 #startButton {
   position: fixed;
   z-index: 9999999;
+}
+
+.div-nero {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
 }
