@@ -116,7 +116,7 @@ function setup() {
 
   video = createCapture(VIDEO);
   video.size(320, 240);
-  //video.hide();
+  video.hide();
   flippedVideo = ml5.flipImage(video);
   classifyVideo();
 
@@ -217,6 +217,7 @@ function checkTicket() {
   mytTimer = setTimeout(() => {
     if (!ticketShown) {
       stato = "tooLate";
+      clearTimeout(mytTimer);
     }
   }, tooLateTimer);
   if (videoLabel == "Biglietto") {
