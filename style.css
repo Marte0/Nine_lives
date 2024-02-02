@@ -25,6 +25,8 @@ canvas {
 
 #startButton {
   position: fixed;
+  top: 100px;
+  left: 100px;
   z-index: 9999999;
 }
 
