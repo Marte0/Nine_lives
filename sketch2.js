@@ -14,7 +14,7 @@ let videoLabel = "";
 // variabili mie--------------------------------------------------------------
 let stato = "none";
 let z = 10;
-const tooLateTimer = 2000;
+const tooLateTimer = 20000;
 let ticketShown = false;
 //video-----------------------------------------------------------------------
 const knockVideo = document.querySelector(".knockVideo");
@@ -98,7 +98,7 @@ function setup() {
 
   video = createCapture(VIDEO);
   video.size(320, 240);
-  video.hide();
+  //video.hide();
   flippedVideo = ml5.flipImage(video);
   classifyVideo();
 
