@@ -6,7 +6,7 @@ let soundModel = "https://teachablemachine.withgoogle.com/models/CQEan2kQ3/";
 //teachable machine video----------------------------------------------------
 
 let videoClassifier;
-let imageModelURL = "https://teachablemachine.withgoogle.com/models/fF0UMpEJE/";
+let imageModelURL = "https://teachablemachine.withgoogle.com/models/rjYsncDqH/";
 let video;
 let flippedVideo;
 let videoLabel = "";
