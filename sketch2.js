@@ -6,7 +6,7 @@ let soundModel = "https://teachablemachine.withgoogle.com/models/lNW16UxdQ/";
 //teachable machine video----------------------------------------------------
 
 let videoClassifier;
-let imageModelURL = "https://teachablemachine.withgoogle.com/models/z8bxPsH-G/";
+let imageModelURL = "https://teachablemachine.withgoogle.com/models/3S5InRWZg/";
 let video;
 let flippedVideo;
 let videoLabel = "";
@@ -14,7 +14,7 @@ let videoLabel = "";
 // variabili mie--------------------------------------------------------------
 let stato = "none";
 let z = 10;
-const tooLateTimer = 10000;
+const tooLateTimer = 2000;
 let ticketShown = false;
 //video-----------------------------------------------------------------------
 const knockVideo = document.querySelector(".knockVideo");
@@ -108,7 +108,7 @@ function setup() {
 function draw() {
   // background(220);
   // // console.log(soundLabel);
-  //console.log(videoLabel);
+  console.log(videoLabel);
 
   // fill(255);
   // textSize(32);
@@ -195,7 +195,7 @@ function checkTicket() {
       stato = "tooLate";
     }
   }, tooLateTimer);
-  if (videoLabel == "biglietto") {
+  if (videoLabel == "Biglietto") {
     ticketShown = true;
     console.log("dovrei controllare il ticket");
     stato = "animating";
@@ -229,15 +229,13 @@ function checkingRiddle() {
   idleVideo.currentFrame = 0;
   idleVideo.play();
 
-  // if (idleVideo.currentTime.toFixed(1) == 1.1) {
-  //   console.log("sjssjsjjsjsjsjjsjsjsjsjsjsjjsjsjsjsjsjsjsjsjsjssj");
-  // }
-
-  // if (videoLabel == "piegato") {
-  //   stato = "win";
-  // } else if (videoLabel == "storto") {
-  //   stato = "lose";
-  // }
+  if (idleVideo.currentTime.toFixed(1) == 1.1 || idleVideo.currentTime.toFixed(1) == 2.4 || idleVideo.currentTime.toFixed(1) == 4.4 || idleVideo.currentTime.toFixed(1) == 5.9 || idleVideo.currentTime.toFixed(1) == 0) {
+    if (videoLabel == "Biglietto pieghetto") {
+      stato = "win";
+    } else if (videoLabel == "Storto") {
+      stato = "lose";
+    }
+  }
 }
 
 function win() {
