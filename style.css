@@ -17,9 +17,10 @@ canvas {
 .idleVideo,
 .loseVideo {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 884px;
+
+  top: 42px;
+  /* left: -20px; */
+  width: 100%;
   z-index: 1;
 }
 
