@@ -1,8 +1,27 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
 
 canvas {
   display: block;
+}
+
+.knockVideo,
+.openVideo,
+.close1Video,
+.riddleVideo,
+.winVideo,
+.idleVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 884px;
+  z-index: 1;
+}
+
+#startButton {
+  position: fixed;
+  z-index: 9999999;
 }
