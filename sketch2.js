@@ -125,7 +125,7 @@ function setup() {
 
 function draw() {
   // background(220);
-  //console.log(soundLabel);
+  console.log(soundLabel);
   //console.log(videoLabel);
 
   // fill(255);
