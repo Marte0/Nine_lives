@@ -14,7 +14,7 @@ let videoLabel = "";
 // variabili mie--------------------------------------------------------------
 let stato = "none";
 let z = 10;
-const tooLateTimer = 2000;
+const tooLateTimer = 10000;
 let ticketShown = false;
 //video-----------------------------------------------------------------------
 const knockVideo = document.querySelector(".knockVideo");
